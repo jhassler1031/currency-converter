@@ -51,26 +51,38 @@ class Money:
 #Start of conversion to Japanese Yen (JPY)
 
     def conv_to_jpy(self):
-        if self.currency != "JPY":
-            return self.convert("JPY")
-        else:
+        if self.currency == "JPY":
             return Money(self.amount, self.currency)
+        else:
+            if self.currency != "USD":
+                temp = self.conv_to_usd()
+                return temp.conv_to_jpy()
+            else:
+                return self.convert("JPY")
 
 #Start of conversion to Euro (EUR)
 
     def conv_to_eur(self):
-        if self.currency != "EUR":
-            return self.convert("EUR")
-        else:
+        if self.currency == "EUR":
             return Money(self.amount, self.currency)
+        else:
+            if self.currency != "USD":
+                temp = self.conv_to_usd()
+                return temp.conv_to_eur()
+            else:
+                return self.convert("EUR")
 
 #Start of conversion to Bitcoin (XBT)
 
     def conv_to_xbt(self):
-        if self.currency != "XBT":
-            return self.convert("XBT")
-        else:
+        if self.currency == "XBT":
             return Money(self.amount, self.currency)
+        else:
+            if self.currency != "USD":
+                temp = self.conv_to_usd()
+                return temp.conv_to_xbt()
+            else:
+                return self.convert("XBT")
 
 #Start of coversion to US Dollars (USD)
 
@@ -88,6 +100,9 @@ class Money:
 x = Money(50, "USD")
 
 print(x)
+"""
 print(x.conv_to_xbt())
 print(x.conv_to_eur())
 print(x.conv_to_jpy())
+"""
+print(x.conv_to_jpy().conv_to_usd())
