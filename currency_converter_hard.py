@@ -121,21 +121,16 @@ class Money:
     def __mul__(self, other):
         return Money(self.conv_to_usd().amount * other.conv_to_usd().amount, "USD")
 
+    def __floordiv__(self, other):
+        return Money(self.conv_to_usd().amount // other.conv_to_usd().amount, "USD")
+
+    def __truediv__(self, other):
+        return Money(self.conv_to_usd().amount / other.conv_to_usd().amount, "USD")
+
     def __div__(self, other):
-        return Money((self.conv_to_usd().amount) / (other.conv_to_usd().amount), "USD")
+        return Money(self.conv_to_usd().amount / other.conv_to_usd().amount, "USD")
 
 #Start of main
 
 x = Money(50, "USD")
 y = Money(60, "EUR")
-
-print(x)
-print(y)
-print(x / y)
-
-"""
-print(x.conv_to_xbt())
-print(x.conv_to_eur())
-print(x.conv_to_jpy())
-"""
-#print(x.conv_to_jpy().conv_to_usd())
